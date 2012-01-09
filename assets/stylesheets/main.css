@@ -184,6 +184,8 @@ header.global nav {
 	height: 400px;
 	background-color: #000;
 	float: left;
+	background-repeat: none;
+	background-position: 0 0;
 }
 #carousel .feature h1 {
 	color: #8bc810;
@@ -191,9 +193,10 @@ header.global nav {
 	padding: 0;
 }
 #carousel .feature .info {
+	background-color: #000;
 	color: #ecece9;
 	margin-top: 100px;
-	margin-left: 50px;
+	padding: 20px 30px 30px 50px;
 	width: 300px;
 }
 .more {
@@ -213,6 +216,22 @@ header.global nav {
 	text-transform: uppercase;
 	margin-top: 10px;
 }
+#project-jqtouch {
+	background-image: url('../images/project-jqtouch.jpg');
+}
+#project-connect {
+	background-image: url('../images/project-connect.jpg');
+}
+#project-infovis {
+	background-image: url('../images/project-infovis.jpg');
+}
+#project-philogl {
+	background-image: url('../images/project-philogl.jpg');
+}
+#project-raphael {
+	background-image: url('../images/project-raphael.jpg');
+}
+
 /****************************************************
  * Footer
  ****************************************************/
