@@ -64,7 +64,7 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
 	slideEasing: 'easeOut',
 	slideDuration: 0.5,
 	slideMargin: 10,
-	slideOpacity: 0.5,
+	slideOpacity: 0.2,
 	/**
 	 * Constructor
 	 * @param String id
