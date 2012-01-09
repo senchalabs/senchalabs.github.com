@@ -55,20 +55,20 @@ h1 span, h2 span, h3 span, h4 span {
 	display: inline-block;
 	border: 1px solid $gray;
 	background: #fff;
-	@include background(linear-gradient($light-gray, #fff));
+	@include background(linear-gradient(#fff, $light-gray));
 	@include border-radius;
 	@include text-shadow(0 1px 0 #fff);
 
-	&.active {
+	&.active, &:hover {
 		border-bottom: none;
 		background: $light-gray;
-		@include background(linear-gradient($gray, #fff));
+		@include background(linear-gradient(#fff, $gray));
 		@include border-bottom-radius(0);
 	}
 
-	&:hover {
-		background-color: $light-gray;
-		@include background(linear-gradient($gray, #fff));
+	&.active {
+		border-bottom: none;
+		@include border-bottom-radius(0);
 	}
 }
 
@@ -161,29 +161,33 @@ header.global {
 	width: 950px;
 	height: 400px;
 	position: relative;
-}
-#carousel #container {
-	position: absolute;
-}
-#carousel .feature {
-	width: 955px;
-	height: 400px;
-	background-color: #000;
-	float: left;
-	background-repeat: none;
-	background-position: 0 0;
-}
-#carousel .feature h1 {
-	color: #8bc810;
-	margin: 0;
-	padding: 0;
-}
-#carousel .feature .info {
-	background-color: #000;
-	color: $light-gray;
-	margin-top: 100px;
-	padding: 20px 30px 30px 50px;
-	width: 300px;
+
+	#container {
+		position: absolute;
+	}
+
+	.feature {
+		width: 955px;
+		height: 400px;
+		background-color: #000;
+		float: left;
+		background-repeat: none;
+		background-position: 0 0;
+
+		h1 {
+			color: #8bc810;
+			margin: 0;
+			padding: 0;
+		}
+
+		.info {
+			background-color: #000;
+			color: $light-gray;
+			margin-top: 100px;
+			padding: 20px 30px 30px 50px;
+			width: 300px;
+		}
+	}
 }
 .more {
 	font-size: 0.8em;
