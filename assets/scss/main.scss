@@ -1,0 +1,225 @@
+/****************************************************
+ * Main Styles
+ *
+ * @project Sencha Labs
+ * @version 1.0
+ * @author Isaac Horton <iworktoomuch@me.com>
+ * @author David Kaneda <dk@morfunk.com>
+ * @copyright 2012 Sencha Inc. All Rights Reserved.
+ *
+ *
+ ****************************************************/
+
+@import 'compass', 'normalize', 'grid';
+
+$light-gray: #ecece9;
+$gray: #d8d8d8;
+$dark-gray: #707070;
+$black: #1a1a1a;
+$green: #8bc810;
+
+html, body {
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+body {
+	font-size: 0.80em;
+	color: #707070;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	background: #fff url("../images/body-bg.gif") repeat 0 0;
+}
+a {
+	color: #707070;
+	text-decoration: none;
+}
+h1, h2, h3, h4 {
+	line-height: 1.5em;
+	font-weight: normal;
+}
+h1 span, h2 span, h3 span, h4 span {
+	color: #8bc810;
+}
+* {
+	outline: 0;
+}
+
+/****************************************************
+ * Menu
+ ****************************************************/
+#select {
+	color: #707070;
+	width: 175px;
+	padding: 4px 10px;
+	display: inline-block;
+	border: 1px solid $gray;
+	background: #fff;
+	@include background(linear-gradient($light-gray, #fff));
+	@include border-radius;
+	@include text-shadow(0 1px 0 #fff);
+
+	&.active {
+		border-bottom: none;
+		background: $light-gray;
+		@include background(linear-gradient($gray, #fff));
+		@include border-bottom-radius(0);
+	}
+
+	&:hover {
+		background-color: $light-gray;
+		@include background(linear-gradient($gray, #fff));
+	}
+}
+
+.arrow {
+	width: 8px;
+	height: 8px;
+	float: right;
+	display: block;
+	margin-top: 3px;
+	background: transparent url("../images/menu-arrow.png") no-repeat 0 0;
+}
+
+#project-title {
+	float: left;
+}
+
+menu {
+	width: 195px;
+	margin: 0;
+	padding: 0;
+	display: none;
+	border: 1px solid $gray;
+	background: #fff;
+	@include background(linear-gradient($light-gray, #fff));
+	@include border-radius;
+	position: absolute;
+	left: 0;
+	top: 24px;
+	z-index: 9999;
+
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+
+	li {
+		width: 195px;
+		list-style-type: none;
+
+		a {
+			padding: 5px 10px;
+			display: block;
+			text-shadow: 0 1px 0 #fff;
+			color: #707070;
+
+			&:hover {
+				color: $green;
+			}
+		}
+
+		&:last-child a {
+			@include border-bottom-radius(5px);
+		}
+	}
+}
+
+/****************************************************
+ * Header
+ ****************************************************/
+header.global {
+	height: 50px;
+	margin-top: 50px;
+	padding-bottom: 20px;	
+	border-bottom: 1px solid $gray;
+
+	h1 {
+		margin: 0;
+		padding: 0;	
+		float: left;
+		
+		a {
+			width: 185px;
+			height: 50px;
+			display: block;
+			background: transparent url("../images/header-logo.png") no-repeat 0 0;
+		}
+	}
+
+	nav {
+		margin-top: 15px;
+		float: right;	
+		position: relative;
+	}
+}
+
+/****************************************************
+ * Article
+ ****************************************************/
+#carousel {
+	width: 950px;
+	height: 400px;
+	position: relative;
+}
+#carousel #container {
+	position: absolute;
+}
+#carousel .feature {
+	width: 955px;
+	height: 400px;
+	background-color: #000;
+	float: left;
+	background-repeat: none;
+	background-position: 0 0;
+}
+#carousel .feature h1 {
+	color: #8bc810;
+	margin: 0;
+	padding: 0;
+}
+#carousel .feature .info {
+	background-color: #000;
+	color: $light-gray;
+	margin-top: 100px;
+	padding: 20px 30px 30px 50px;
+	width: 300px;
+}
+.more {
+	font-size: 0.8em;
+	color: #fff;
+	display: inline-block;
+	padding: 7px 10px;
+	background: #729600;
+	@include background(linear-gradient($green, lighten($green, 10)));
+	@include border-radius(5px);
+	text-shadow: 0 1px 0 #729600;
+	text-transform: uppercase;
+	margin-top: 10px;
+}
+#project-jqtouch {
+	background-image: url('../images/project-jqtouch.jpg');
+}
+#project-connect {
+	background-image: url('../images/project-connect.jpg');
+}
+#project-infovis {
+	background-image: url('../images/project-infovis.jpg');
+}
+#project-philogl {
+	background-image: url('../images/project-philogl.jpg');
+}
+#project-raphael {
+	background-image: url('../images/project-raphael.jpg');
+}
+
+/****************************************************
+ * Footer
+ ****************************************************/
+footer.global {
+ 	font-size: 0.85em;
+	height: 30px;
+	padding-top: 10px;
+	margin-top: 10px;	
+	border-top: 1px solid $gray;
+}
