@@ -193,7 +193,7 @@ header.global {
 	display: inline-block;
 	padding: 7px 10px;
 	background: #729600;
-	@include background(linear-gradient($green, lighten($green, 10)));
+	@include background(linear-gradient($green, darken($green, 10)));
 	@include border-radius(5px);
 	text-shadow: 0 1px 0 #729600;
 	text-transform: uppercase;
