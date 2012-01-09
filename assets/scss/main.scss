@@ -49,15 +49,15 @@ h1 span, h2 span, h3 span, h4 span {
  * Menu
  ****************************************************/
 #select {
-	color: $black;
+	color: #fff;
 	width: 175px;
 	padding: 4px 10px;
 	display: inline-block;
-	border: 1px solid $dark-gray;
+	border: 1px solid $green;
 	background: $dark-gray;
 	@include background(linear-gradient($green, darken($green, 10)));
 	@include border-radius;
-	@include text-shadow(0 1px 0 $green);
+	text-shadow: 0 -1px 0 darken($green, 15);
 
 	&:hover {
 
@@ -75,7 +75,7 @@ h1 span, h2 span, h3 span, h4 span {
 	float: right;
 	display: block;
 	margin-top: 3px;
-	background: transparent url("../images/menu-arrow.png") no-repeat 0 -8px;
+	background: transparent url("../images/menu-arrow.png") no-repeat 0 0;
 }
 
 #project-title {
@@ -87,9 +87,10 @@ menu {
 	margin: 0;
 	padding: 0;
 	display: none;
-	border: 1px solid $dark-gray;
-	background: $dark-gray;
-	@include background(linear-gradient($green, darken($green, 10)));
+	border: 1px solid $green;
+	border-top:1px solid darken($green, 10);
+	background: darken($green, 7);
+	//@include background(linear-gradient($green, darken($green, 10)));
 	@include border-radius;
 	@include border-top-radius(0);
 	position: absolute;
@@ -109,11 +110,11 @@ menu {
 		a {
 			padding: 5px 10px;
 			display: block;
-			text-shadow: 0 1px 0 $green;
-			color: $black;
+			text-shadow: 0 -1px 0 darken($green, 15);
+			color: #fff;
 
 			&:hover {
-				// color: $dark-gray;
+				background-color: darken($green, 11);
 			}
 		}
 
@@ -195,7 +196,7 @@ header.global {
 	background: #729600;
 	@include background(linear-gradient($green, darken($green, 10)));
 	@include border-radius(5px);
-	text-shadow: 0 1px 0 #729600;
+	text-shadow: 0 -1px 0 darken($green, 15);
 	text-transform: uppercase;
 	margin-top: 10px;
 }
