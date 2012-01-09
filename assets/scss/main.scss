@@ -49,15 +49,15 @@ h1 span, h2 span, h3 span, h4 span {
  * Menu
  ****************************************************/
 #select {
-	color: #fff;
+	color: $black;
 	width: 175px;
 	padding: 4px 10px;
 	display: inline-block;
 	border: 1px solid $dark-gray;
 	background: $dark-gray;
-	@include background(linear-gradient($dark-gray, $black));
+	@include background(linear-gradient($green, darken($green, 10)));
 	@include border-radius;
-	@include text-shadow(0 1px 0 $black);
+	@include text-shadow(0 1px 0 $green);
 
 	&:hover {
 
@@ -89,7 +89,7 @@ menu {
 	display: none;
 	border: 1px solid $dark-gray;
 	background: $dark-gray;
-	@include background(linear-gradient($dark-gray, $black));
+	@include background(linear-gradient($green, darken($green, 10)));
 	@include border-radius;
 	@include border-top-radius(0);
 	position: absolute;
@@ -109,11 +109,11 @@ menu {
 		a {
 			padding: 5px 10px;
 			display: block;
-			text-shadow: 0 1px 0 $black;
-			color: #fff;
+			text-shadow: 0 1px 0 $green;
+			color: $black;
 
 			&:hover {
-				color: $green;
+				// color: $dark-gray;
 			}
 		}
 
