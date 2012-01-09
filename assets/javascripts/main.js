@@ -83,6 +83,9 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
 		
 		this.slides.each(function(el, t, i) {
 			el.setStyle('marginRight', this.slideMargin + "px");
+			el.on('click', function(evt, an) {
+				this.goTo(i);
+			}, this);
 		}, this);
 		
 		this.slideWidth  = this.slides.item(0).getWidth() + this.slideMargin;
