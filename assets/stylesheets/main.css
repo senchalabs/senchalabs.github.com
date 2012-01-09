@@ -176,6 +176,7 @@ header.global nav {
 	height: 400px;
 	position: relative;
 	overflow-y: hidden;
+	overflow-x: visible;
 }
 #carousel #container {
 	position: absolute;
