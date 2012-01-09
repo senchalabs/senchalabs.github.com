@@ -64,6 +64,7 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
 	slideEasing: 'easeOut',
 	slideDuration: 0.5,
 	slideMargin: 10,
+	slideOpacity: 0.5,
 	/**
 	 * Constructor
 	 * @param String id
@@ -117,6 +118,8 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
 				null,
 				this.slideEasing
 			);
+			this.activeIndex = index;
+			this.setOpacity();
 		}
 	},
 	/**
@@ -138,6 +141,23 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
 			this.activeIndex = (this.slides.getCount()-1);
 		}
 		this.goTo(this.activeIndex);	
+	},
+	/**
+	 * Set the slide opacity
+	 */
+	setOpacity: function() {
+		this.slides.each(function(el, t, i) {
+			console.log(i +' '+ this.activeIndex);
+			if(i != this.activeIndex) {
+				el.animate({
+					opacity: { to: this.slideOpacity }
+				});
+			} else {
+				el.animate({
+					opacity: { to: 1.0 }
+				});
+			}
+		}, this);	
 	}
 });
 
