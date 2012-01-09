@@ -95,11 +95,6 @@ h1 span, h2 span, h3 span, h4 span {
 #project-title {
 	float: left;
 }
-/*
-.active .arrow {
-	background-position: 0 -8px;
-}
-*/
 menu {
 	width: 195px;
 	margin: 0;
@@ -187,8 +182,36 @@ header.global nav {
 #carousel .feature {
 	width: 955px;
 	height: 400px;
-	background-color: #ecece9;
+	background-color: #000;
 	float: left;
+}
+#carousel .feature h1 {
+	color: #8bc810;
+	margin: 0;
+	padding: 0;
+}
+#carousel .feature .info {
+	color: #ecece9;
+	margin-top: 100px;
+	margin-left: 50px;
+	width: 300px;
+}
+.more {
+	font-size: 0.8em;
+	color: #fff;
+	display: inline-block;
+	padding: 7px 10px;
+	background: #729600;
+	background: linear-gradient(bottom, #729600 0%, #8bc810 100%);
+	background: -moz-linear-gradient(bottom, #729600 0%, #8bc810 100%);
+	background: -webkit-linear-gradient(bottom, #729600 0%, #8bc810 100%);
+	background: -ms-linear-gradient(bottom, #729600 0%, #8bc810 100%);
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	text-shadow: 0 1px 0 #729600;
+	text-transform: uppercase;
+	margin-top: 10px;
 }
 /****************************************************
  * Footer
