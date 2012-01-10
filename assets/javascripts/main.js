@@ -64,7 +64,7 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
     slideEasing: 'easeOut',
     slideDuration: 0.5,
     slideMargin: 10,
-    slideOpacity: 0.2,
+    slideOpacity: 0.35,
     /**
      * Constructor
      * @param String id
@@ -150,7 +150,6 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
      */
     setOpacity: function() {
         this.slides.each(function(el, t, i) {
-            console.log(i +' '+ this.activeIndex);
             if(i != this.activeIndex) {
                 el.animate({
                     opacity: { to: this.slideOpacity }
@@ -173,4 +172,12 @@ Ext.onReady(function() {
         carousel.goTo(t.getAttribute('data-project'));
         select.close();
     });
+	Ext.EventManager.addListener(window, 'keydown', function(e,t) {
+		if(e.keyCode == 37) {
+			carousel.prev();
+		}
+		if(e.keyCode == 39) {
+			carousel.next();
+		}
+	});
 });
