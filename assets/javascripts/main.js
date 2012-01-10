@@ -164,14 +164,17 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
 });
 
 Ext.onReady(function() {
+	Ext.get("container").show();
     var carousel = new Ext.ux.Carousel("container");
     var select = new Ext.ux.Menu("select");
+	
     var projects = Ext.get("projects").select('a');
     projects.on('click', function(e, t) {
         Ext.get('project-title').dom.innerHTML = t.innerHTML;
         carousel.goTo(t.getAttribute('data-project'));
         select.close();
     });
+	
 	Ext.EventManager.addListener(window, 'keydown', function(e,t) {
 		if(e.keyCode == 37) {
 			carousel.prev();
