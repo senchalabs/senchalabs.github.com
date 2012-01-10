@@ -130,7 +130,7 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
      */
     next: function() {
         this.activeIndex++;
-        if(this.activeIndex > this.slides.getCount()) {
+        if(this.activeIndex >= this.slides.getCount()) {
             this.activeIndex = 0;
         }
         this.goTo(this.activeIndex);
