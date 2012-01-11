@@ -143,9 +143,9 @@ menu {
  ****************************************************/
 header.global {
 	height: 50px;
-	margin-top: 50px;
-	padding-bottom: 20px;	
-	border-bottom: 1px solid #3c3c3f;
+	margin-top: 30px;
+	padding-left: 4px;
+	padding-bottom: 10px;	
 
 	h1 {
 		margin: 0;
@@ -181,12 +181,19 @@ header.global {
 	}
 
 	.feature {
+		-webkit-backface-visibility: hidden; // Fixes transition antialiasing
 		width: 955px;
 		height: 400px;
 		background-color: #000;
 		float: left;
 		background-repeat: none;
 		background-position: 0 0;
+
+		// Default inactive state
+		@include scale(.9);
+		@include opacity(.5);
+		cursor: pointer;
+		@include transition(all .8s ease-in-out); // Slightly longer than slide animation
 
 		h1 {
 			color: #8bc810;
@@ -205,18 +212,30 @@ header.global {
 				line-height: 1.5em;
 			}
 		}
+
+
+		a {
+			pointer-events: none;
+		}
+
+		&.active {
+			cursor: default;
+			@include opacity(1);
+			@include scale(1);
+			a {
+				pointer-events: all;
+			}
+		}
 	}
 }
 .more {
-	font-size: 0.8em;
-	color: #fff;
+	$more-color: darken($green, 15);
 	display: inline-block;
 	padding: 7px 10px;
-	background: #729600;
-	@include background(linear-gradient($green, darken($green, 10)));
-	@include border-radius(5px);
-	text-shadow: 0 -1px 0 darken($green, 15);
-	text-transform: uppercase;
+	@include background-gradient($more-color, glossy);
+	@include color-by-background($more-color);
+	@include bevel-shadow($size: 2px);
+	@include border-radius(2px);
 	margin-top: 10px;
 }
 .arrow {
@@ -257,6 +276,7 @@ header.global {
  * Footer
  ****************************************************/
 footer.global {
+	-webkit-backface-visibility: hidden; // Fixes transition flicker
 	@include color-by-background($dark-gray, 30);
 	height: 30px;
 	padding-top: 10px;
