@@ -10,13 +10,18 @@
  *
  ****************************************************/
 
-@import 'compass', 'normalize', 'grid';
+@import 'compass', 'recipes', 'normalize', 'grid';
 
 $light-gray: #ecece9;
 $gray: #d8d8d8;
-$dark-gray: #707070;
+$med-gray: #707070;
+$dark-gray: #494a4f;
 $black: #1a1a1a;
 $green: #8bc810;
+
+.smoothtype {
+	-webkit-font-smoothing: antialiased;
+}
 
 html, body {
 	width: 100%;
@@ -26,20 +31,30 @@ html, body {
 }
 body {
 	font-size: 0.80em;
-	color: #fff;
 	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-	background: #494a4f url("../images/body-bg.jpg") repeat-x 0 0;
+	// background: $dark-gray url("../images/body-bg.jpg") repeat-x 0 0;
+	@include background-blueprint-grid(
+		$background-color: darken($dark-gray, 15),
+		$width: 50px,
+		$width-alt: 5px,
+		$foreground-color: rgba(#fff, .05),
+		$foreground-color-alt: rgba(#fff, .05)
+	);
+
+	@include color-by-background($dark-gray, 50);
 }
+
 a {
-	color: #707070;
+	@include color-by-background($dark-gray, 70);
 	text-decoration: none;
 }
 h1, h2, h3, h4 {
 	line-height: 1.5em;
 	font-weight: normal;
+	@extend .smoothtype;
 }
 h1 span, h2 span, h3 span, h4 span {
-	color: #8bc810;
+	color: $green;
 }
 * {
 	outline: 0;
@@ -54,8 +69,9 @@ h1 span, h2 span, h3 span, h4 span {
 	padding: 4px 10px;
 	display: inline-block;
 	border: 1px solid $black;
-	background: #242426;
-	@include background(linear-gradient(#4a4c50, #242426));
+	background: darken($dark-gray, 15);
+	// @include background(linear-gradient(#4a4c50, #242426));
+	@include background-gradient(darken($dark-gray, 15), glossy);
 	@include border-radius;
 	text-shadow: 0 1px 0 $black;
 
@@ -70,12 +86,10 @@ h1 span, h2 span, h3 span, h4 span {
 }
 
 .tri {
-	width: 8px;
-	height: 8px;
-	float: right;
-	display: block;
-	margin-top: 3px;
-	background: transparent url("../images/menu-arrow.png") no-repeat 0 0;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	@include triangle($width: 4px, $color: color-by-background($dark-gray, 50), $direction: 'bottom');
 }
 
 #project-title {
@@ -181,11 +195,15 @@ header.global {
 		}
 
 		.info {
-			// background-color: #000;
 			color: $light-gray;
 			margin-top: 100px;
 			padding: 20px 30px 30px 50px;
 			width: 300px;
+
+			p {
+				font-size: 1.1em;
+				line-height: 1.5em;
+			}
 		}
 	}
 }
@@ -239,7 +257,7 @@ header.global {
  * Footer
  ****************************************************/
 footer.global {
- 	font-size: 0.85em;
+	@include color-by-background($dark-gray, 30);
 	height: 30px;
 	padding-top: 10px;
 	margin-top: 10px;	
