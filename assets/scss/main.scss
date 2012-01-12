@@ -7,7 +7,6 @@
  * @author David Kaneda <dk@morfunk.com>
  * @copyright 2012 Sencha Inc. All Rights Reserved.
  *
- *
  ****************************************************/
 
 @import 'compass', 'recipes', 'normalize', 'grid';
@@ -37,8 +36,7 @@ body {
 		$dot-color:  darken($dark-gray, 3),
 		$size: 20%,
 		$spacing: 12px
-		);
-
+	);
 	@include color-by-background($dark-gray, 50);
 }
 
@@ -56,109 +54,6 @@ h1 span, h2 span, h3 span, h4 span {
 }
 * {
 	outline: 0;
-}
-
-/****************************************************
- * Menu
- ****************************************************/
-#select {
-	width: 175px;
-	padding: 4px 10px;
-	display: inline-block;
-	border: 1px solid $black;
-	font-size: 18px;
-	@include background-image(
-		background_noise(),
-		matte-gradient($med-gray)
-	);
-	@include border-radius;
-	text-shadow: 0 1px 0 $black;
-	@include transition(all 100ms linear);
-	@include color-by-background($med-gray);
-
-	&:hover {
-		@include box-shadow(rgba($green, .8) 0 0 5px);
-	}
-	&.active {
-		@include box-shadow(rgba($green, .8) 0 0 10px, rgba(lighten($green, 20), .5) 0 0 3px);
-		border-bottom: none;
-		@include border-bottom-radius(0);
-	}
-
-	&:after {
-		@include pseudo-element;
-		position: absolute;
-		right: 10px;
-		top: 13px;
-		@include triangle($width: 6px, $color: color-by-background($dark-gray, 50), $direction: 'bottom');
-	}
-}
-
-#project-title {
-	float: left;
-}
-
-menu {
-	width: 195px;
-	margin: 0;
-	padding: 0;
-	border: 1px solid darken($dark-gray, 5);
-	@include background-gradient($dark-gray);
-	@include border-radius;
-	@include border-top-radius(0);
-	position: absolute;
-	left: 0;
-	top: 28px;
-	z-index: 9999;
-
-
-	.js & {
-		pointer-events: none;
-		@include transform-origin(0 0);
-		@include opacity(0);
-		@include scale(.8);
-		overflow: hidden;
-	}
-
-	.csstransition & {
-		@include transition;
-	}
-
-	.js &.active {
-		@include scale(1);
-		@include opacity(1);
-		pointer-events: all;
-	}
-
-	ul {
-		margin: 0;
-		padding: 0;
-	}
-
-	li {
-		width: 195px;
-		list-style-type: none;
-
-		a {
-			padding: 5px 10px;
-			display: block;
-			text-shadow: 0 1px 0 $black;
-			color: #ababab;
-
-			&:hover {
-				color: #fff;
-				background-color: darken($green, 11);
-			}
-		}
-
-		&:last-child a {
-			@include border-bottom-radius(5px);
-		}
-	}
-}
-
-.js header.intro {
-	display: none;
 }
 
 /****************************************************
@@ -194,6 +89,9 @@ header.global {
 /****************************************************
  * Article
  ****************************************************/
+.js header.intro {
+	display: none;
+}
 #carousel {
 	width: 950px;
 	height: 400px;
@@ -233,7 +131,6 @@ header.global {
 		color: $light-gray;
 		margin-top: 100px;
 		padding: 20px 500px 30px 50px;
-		// width: 300px;
 
 		p {
 			margin: 0;
@@ -241,7 +138,6 @@ header.global {
 			line-height: 1.4em;
 		}
 	}
-
 
 	a {
 		pointer-events: none;
@@ -276,44 +172,29 @@ header.global {
 	);
 
 }
-.arrow {
-	width: 25px;
-	height: 42px;
-	display: block;
-	position: absolute;
-	top: 400px;
-	background-repeat: no-repeat;
-	background-position: 0 0;
-	z-index: 1000;
-}
-#arrow-left {
-	background-image: url('../images/project-arrow-left.png');
-	left: 20px;
-}
-#arrow-right {
-	background-image: url('../images/project-arrow-right.png');
-	right: 20px;
-}
 #project-jqtouch {
 	background-image: url('../images/project-jqtouch.jpg');
 }
-#carousel #project-connect {
+#project-connect {
 	background-image: url('../images/project-connect.jpg');
-
 	h1 {
 		color: #56AAEA;
 	}
 }
 #project-infovis {
 	background-image: url('../images/project-infovis.jpg');
-	h1 { color: #009EDA; }
+	h1 { 
+		color: #009EDA; 
+	}
 }
-#carousel #project-philogl {
+#project-philogl {
 	background-image: url('../images/project-philogl.jpg');
 
-	h1 { color: #009EDA; }
+	h1 { 
+		color: #009EDA; 
+	}
 }
-#carousel #project-raphael {
+#project-raphael {
 	background-image: url('../images/project-raphael.jpg');
 
 	h1 {
