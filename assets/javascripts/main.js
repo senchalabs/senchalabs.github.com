@@ -22,17 +22,18 @@ Ext.ux.Menu = Ext.extend(Ext.util.Observable, {
         this.element = Ext.get(id);
         this.menuSelector = this.element.getAttribute('data-menu') || this.menuSelector;
         this.menu  = Ext.get(this.menuSelector, false);
-        
-        this.menu.hide();
-        
+                
         this.element.on('click', this.onClick, this);
+
+        // Ext.get(document.body).on('click', this.onClick, this);
+
     },
     /**
      * On trigger click
      * @param EventObject e
      */
     onClick: function(e) {
-        if(this.menu.isVisible()) {
+        if(this.menu.hasClass(this.activeCls)) {
             this.close();
         } else {
             this.open();
@@ -43,16 +44,16 @@ Ext.ux.Menu = Ext.extend(Ext.util.Observable, {
      */
     open: function() {
         this.element.toggleClass(this.activeCls);
+        this.menu.toggleClass(this.activeCls);
         this.fireEvent('opened');
-        this.menu.show();
     },
     /**
      * Close menu
      */
     close: function() {
         this.element.toggleClass(this.activeCls);
+        this.menu.toggleClass(this.activeCls);
         this.fireEvent('closed');
-        this.menu.hide();
     }
 });
 

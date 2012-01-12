@@ -15,7 +15,7 @@
 $light-gray: #ecece9;
 $gray: #d8d8d8;
 $med-gray: #707070;
-$dark-gray: #494a4f;
+$dark-gray: #262626;
 $black: #1a1a1a;
 $green: #8bc810;
 
@@ -32,14 +32,12 @@ html, body {
 body {
 	font-size: 0.80em;
 	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-	// background: $dark-gray url("../images/body-bg.jpg") repeat-x 0 0;
-	@include background-blueprint-grid(
-		$background-color: darken($dark-gray, 15),
-		$width: 50px,
-		$width-alt: 5px,
-		$foreground-color: rgba(#fff, .05),
-		$foreground-color-alt: rgba(#fff, .05)
-	);
+	@include background-polka-dot(
+		$bg-color: $dark-gray,
+		$dot-color:  darken($dark-gray, 3),
+		$size: 20%,
+		$spacing: 12px
+		);
 
 	@include color-by-background($dark-gray, 50);
 }
@@ -64,32 +62,36 @@ h1 span, h2 span, h3 span, h4 span {
  * Menu
  ****************************************************/
 #select {
-	color: #ababab;
 	width: 175px;
 	padding: 4px 10px;
 	display: inline-block;
 	border: 1px solid $black;
-	background: darken($dark-gray, 15);
-	// @include background(linear-gradient(#4a4c50, #242426));
-	@include background-gradient(darken($dark-gray, 15), glossy);
+	font-size: 18px;
+	@include background-image(
+		background_noise(),
+		matte-gradient($med-gray)
+	);
 	@include border-radius;
 	text-shadow: 0 1px 0 $black;
+	@include transition(all 100ms linear);
+	@include color-by-background($med-gray);
 
 	&:hover {
-
+		@include box-shadow(rgba($green, .8) 0 0 5px);
 	}
-
 	&.active {
+		@include box-shadow(rgba($green, .8) 0 0 10px, rgba(lighten($green, 20), .5) 0 0 3px);
 		border-bottom: none;
 		@include border-bottom-radius(0);
 	}
-}
 
-.tri {
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	@include triangle($width: 4px, $color: color-by-background($dark-gray, 50), $direction: 'bottom');
+	&:after {
+		@include pseudo-element;
+		position: absolute;
+		right: 10px;
+		top: 13px;
+		@include triangle($width: 6px, $color: color-by-background($dark-gray, 50), $direction: 'bottom');
+	}
 }
 
 #project-title {
@@ -100,16 +102,33 @@ menu {
 	width: 195px;
 	margin: 0;
 	padding: 0;
-	display: none;
-	border: 1px solid $black;
-	background: #242426;
-	@include background(linear-gradient(#4a4c50, #242426));
+	border: 1px solid darken($dark-gray, 5);
+	@include background-gradient($dark-gray);
 	@include border-radius;
 	@include border-top-radius(0);
 	position: absolute;
 	left: 0;
-	top: 24px;
+	top: 28px;
 	z-index: 9999;
+
+
+	.js & {
+		pointer-events: none;
+		@include transform-origin(0 0);
+		@include opacity(0);
+		@include scale(.8);
+		overflow: hidden;
+	}
+
+	.csstransition & {
+		@include transition;
+	}
+
+	.js &.active {
+		@include scale(1);
+		@include opacity(1);
+		pointer-events: all;
+	}
 
 	ul {
 		margin: 0;
@@ -138,14 +157,19 @@ menu {
 	}
 }
 
+.js header.intro {
+	display: none;
+}
+
 /****************************************************
  * Header
  ****************************************************/
 header.global {
 	height: 50px;
-	margin-top: 30px;
+	margin: 30px 0 10px;
 	padding-left: 4px;
-	padding-bottom: 10px;	
+	padding-bottom: 10px;
+	border-bottom: 1px solid rgba(#fff, .1);
 
 	h1 {
 		margin: 0;
@@ -174,69 +198,83 @@ header.global {
 	width: 950px;
 	height: 400px;
 	position: relative;
+}
 
-	#container {
-		display: none;
-		position: absolute;
+#container {
+	display: none;
+	position: absolute;
+}
+
+.feature {
+	-webkit-backface-visibility: hidden; // Fixes transition antialiasing
+	width: 955px;
+	height: 400px;
+	background-color: #000;
+	float: left;
+	background-repeat: none;
+	background-position: 0 0;
+	@include border-radius(8px);
+
+	// Default inactive state
+	@include scale(.9);
+	@include opacity(.5);
+	cursor: pointer;
+	@include transition(all .8s ease-in-out); // Slightly longer than slide animation
+
+	h1 {
+		color: $green;
+		font-weight: bold;
+		margin: 0;
+		padding: 0;
+		font-size: 48px;
 	}
 
-	.feature {
-		-webkit-backface-visibility: hidden; // Fixes transition antialiasing
-		width: 955px;
-		height: 400px;
-		background-color: #000;
-		float: left;
-		background-repeat: none;
-		background-position: 0 0;
+	.info {
+		color: $light-gray;
+		margin-top: 100px;
+		padding: 20px 500px 30px 50px;
+		// width: 300px;
 
-		// Default inactive state
-		@include scale(.9);
-		@include opacity(.5);
-		cursor: pointer;
-		@include transition(all .8s ease-in-out); // Slightly longer than slide animation
-
-		h1 {
-			color: #8bc810;
+		p {
 			margin: 0;
-			padding: 0;
+			font-size: 18px;
+			line-height: 1.4em;
 		}
+	}
 
-		.info {
-			color: $light-gray;
-			margin-top: 100px;
-			padding: 20px 30px 30px 50px;
-			width: 300px;
 
-			p {
-				font-size: 1.1em;
-				line-height: 1.5em;
-			}
-		}
+	a {
+		pointer-events: none;
+	}
 
+	&.active {
+		cursor: default;
+		@include opacity(1);
+		@include scale(1);
+		@include box-shadow(rgba(#000, .3) 0 1px 3px);
 
 		a {
-			pointer-events: none;
-		}
-
-		&.active {
-			cursor: default;
-			@include opacity(1);
-			@include scale(1);
-			a {
-				pointer-events: all;
-			}
+			pointer-events: all;
 		}
 	}
 }
 .more {
-	$more-color: darken($green, 15);
+	$more-color: darken($dark-gray, 15);
 	display: inline-block;
-	padding: 7px 10px;
+	font-size: 14px;
+	font-weight: bold;
 	@include background-gradient($more-color, glossy);
-	@include color-by-background($more-color);
-	@include bevel-shadow($size: 2px);
-	@include border-radius(2px);
+	@include color-by-background($more-color, 50);
 	margin-top: 10px;
+	@include webfont-icon(
+		'►', 
+		$size: 10px, 
+		$text-align: right,
+		$hide-text: false, 
+		$color: color-by-background($more-color, 40), 
+		$color-hover: $green
+	);
+
 }
 .arrow {
 	width: 25px;
@@ -259,17 +297,28 @@ header.global {
 #project-jqtouch {
 	background-image: url('../images/project-jqtouch.jpg');
 }
-#project-connect {
+#carousel #project-connect {
 	background-image: url('../images/project-connect.jpg');
+
+	h1 {
+		color: #56AAEA;
+	}
 }
 #project-infovis {
 	background-image: url('../images/project-infovis.jpg');
+	h1 { color: #009EDA; }
 }
-#project-philogl {
+#carousel #project-philogl {
 	background-image: url('../images/project-philogl.jpg');
+
+	h1 { color: #009EDA; }
 }
-#project-raphael {
+#carousel #project-raphael {
 	background-image: url('../images/project-raphael.jpg');
+
+	h1 {
+		color: #F89938;
+	}
 }
 
 /****************************************************
