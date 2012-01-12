@@ -1,66 +1,13 @@
 Ext.ns('Ext.ux');
 
-Ext.ux.Menu = Ext.extend(Ext.util.Observable, {
-    menuSelector: 'projects',
-    menuEasing: 'easeOut',
-    menuDuration: 0.25,
-    activeCls: 'active',
-    /**
-     * Constructor
-     * @param String id
-     * @param Object config
-     */
-    constructor: function(id, config) {
-        
-        config = config || {};
-        Ext.apply(this, config);
-        
-        Ext.ux.Menu.superclass.constructor.call(this, config);
-        
-        this.addEvents('opened', 'closed');
-        
-        this.element = Ext.get(id);
-        this.menuSelector = this.element.getAttribute('data-menu') || this.menuSelector;
-        this.menu  = Ext.get(this.menuSelector, false);
-                
-        this.element.on('click', this.onClick, this);
-
-        // Ext.get(document.body).on('click', this.onClick, this);
-
-    },
-    /**
-     * On trigger click
-     * @param EventObject e
-     */
-    onClick: function(e) {
-        if(this.menu.hasClass(this.activeCls)) {
-            this.close();
-        } else {
-            this.open();
-        }
-    },
-    /**
-     * Open menu
-     */
-    open: function() {
-        this.element.toggleClass(this.activeCls);
-        this.menu.toggleClass(this.activeCls);
-        this.fireEvent('opened');
-    },
-    /**
-     * Close menu
-     */
-    close: function() {
-        this.element.toggleClass(this.activeCls);
-        this.menu.toggleClass(this.activeCls);
-        this.fireEvent('closed');
-    }
-});
-
 /****************************************************
  * Carousel
  ****************************************************/
 Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
+	KEY_LEFT: 37,
+	KEY_UP: 38,
+	KEY_RIGHT: 39,
+	KEY_DOWN: 40,
     slideSelector: 'div',
     slideEasing: 'easeOut',
     slideDuration: 0.5,
@@ -93,10 +40,23 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
         this.totalWidth  = (this.slides.getCount() * this.slideWidth);
         
         this.activeIndex = Math.floor(this.slides.getCount()/2);
-        
         this.element.setWidth(this.totalWidth);
-        
         this.goTo(this.activeIndex);
+
+		Ext.EventManager.addListener(window, 'keydown', function(e,t) {
+			if(e.keyCode == this.KEY_LEFT) {
+				this.onKeyLeft(e);
+			}
+			if(e.keyCode == this.KEY_RIGHT) {
+				this.onKeyRight(e);
+			}
+			if(e.keyCode == this.KEY_UP) {
+				this.onKeyUp(e);
+			}
+			if(e.keyCode == this.KEY_DOWN) {
+				this.onKeyDown(e);
+			}
+		}, this);
     },
     /**
      * Get the left position of a specific slide
@@ -104,9 +64,6 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
      * @return int
      */
     getXPos: function(index) {
-        // Ext.fx.shift doesn't respect the containing element
-        // so we have to look up the body offset to make sure
-        // it aligns properly.
         return -(index * this.slideWidth);
     },
     /**
@@ -157,27 +114,22 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
                 el.addClass('active');
             }
         }, this);
-    }
+    },
+	onKeyLeft: function(e) {
+		this.prev();
+	},
+	onKeyRight: function(e) {
+		this.next();
+	},
+	onKeyUp: function(e) {
+		// stub
+	},
+	onKeyDown: function(e) {
+		// stub
+	}
 });
 
 Ext.onReady(function() {
 	Ext.get("container").show();
     var carousel = new Ext.ux.Carousel("container");
-    var select = new Ext.ux.Menu("select");
-	
-    var projects = Ext.get("projects").select('a');
-    projects.on('click', function(e, t) {
-        Ext.get('project-title').dom.innerHTML = t.innerHTML;
-        carousel.goTo(t.getAttribute('data-project'));
-        select.close();
-    });
-	
-	Ext.EventManager.addListener(window, 'keydown', function(e,t) {
-		if(e.keyCode == 37) {
-			carousel.prev();
-		}
-		if(e.keyCode == 39) {
-			carousel.next();
-		}
-	});
 });
