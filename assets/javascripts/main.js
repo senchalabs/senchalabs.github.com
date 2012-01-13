@@ -4,50 +4,91 @@ Ext.ns('Ext.ux');
  * Carousel
  ****************************************************/
 Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
+	// constants
 	KEY_LEFT: 37,
 	KEY_UP: 38,
 	KEY_RIGHT: 39,
 	KEY_DOWN: 40,
-    slideSelector: 'div',
-    slideEasing: 'easeOut',
-    slideDuration: 0.5,
-    slideMargin: 4,
-    slideOpacity: 0.35,
+	// slide options
+    slideSelector: 'div.feature',
+    slideMargin: -25,
+	// preview options
+	previewIsShowing: false,
     /**
      * Constructor
      * @param String id
      * @param Object config
      */
     constructor: function(id, config) {
-        
+        // set up config
         config = config || {};
         Ext.apply(this, config);
-        
+
+        // init super
         Ext.ux.Carousel.superclass.constructor.call(this, config);
         this.addEvents('complete');
-        
-        this.element = Ext.get(id);
-        this.slides  = this.element.select(this.slideSelector, false);
-        
-        this.slides.each(function(el, t, i) {
+
+        // grab elements
+        this.container = Ext.get(id);
+		this.previews = Ext.get('previews');
+        this.slides  = this.container.select(this.slideSelector, false);
+
+        // set dims
+        this.slideWidth  = this.slides.item(0).getWidth() + this.slideMargin;
+        this.totalWidth  = (this.slides.getCount() * this.slideWidth);
+        this.container.setWidth(this.totalWidth);
+
+		// set default slide
+		this.activeIndex = Math.floor(this.slides.getCount()/2);
+		
+		// init
+		this.initSlides();
+		this.registerKeyPressEvents()
+        this.goTo(this.activeIndex);
+    },
+	/**
+	 * Initialize slides
+	 */
+	initSlides: function() {
+		this.slides.each(function(el, t, i) {
+			// set margin
             el.setStyle('marginRight', this.slideMargin + "px");
+			// get the project title
+			var title = el.select('h1').elements[0].innerText;
+			// create the preview
+			var pr = this.createPreview(el.getAttribute('data-preview'), title);
+			// set click handler
             el.on('click', function(evt, an) {
                 this.goTo(i);
             }, this);
-        }, this);
-        
-        this.slideWidth  = this.slides.item(0).getWidth() + this.slideMargin;
-        this.totalWidth  = (this.slides.getCount() * this.slideWidth);
-        
-        this.activeIndex = Math.floor(this.slides.getCount()/2);
-        this.element.setWidth(this.totalWidth);
-        this.goTo(this.activeIndex);
-
+            pr.on('click', function(evt, an) {
+				this.hidePreviews();
+                this.goTo(i);
+            }, this);
+        }, this);	
+	},
+	/**
+	 * Create the project preview
+	 * @return Element
+	 */
+	createPreview: function(p,t) {
+		var preview = Ext.get(Ext.DomHelper.append(this.previews, { class: 'preview' }));
+		preview.setStyle('backgroundImage', 'url("'+p+'")');
+		Ext.DomHelper.append(preview, {
+			tag: 'h2',
+			html: t
+		});
+		return preview;
+	},
+	/**
+	 * Register key press events
+	 */
+	registerKeyPressEvents: function() {
 		Ext.EventManager.addListener(window, 'keydown', function(e,t) {
-			if(e.keyCode == this.KEY_LEFT) {
+			if(e.keyCode == this.KEY_LEFT && !this.previewIsShowing) {
 				this.onKeyLeft(e);
 			}
-			if(e.keyCode == this.KEY_RIGHT) {
+			if(e.keyCode == this.KEY_RIGHT && !this.previewIsShowing) {
 				this.onKeyRight(e);
 			}
 			if(e.keyCode == this.KEY_UP) {
@@ -57,7 +98,7 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
 				this.onKeyDown(e);
 			}
 		}, this);
-    },
+	},
     /**
      * Get the left position of a specific slide
      * @param int index
@@ -72,15 +113,9 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
      */
     goTo: function(index) {
         if(index < this.slides.getCount() && index >= 0) {
-            this.element.animate({
-                    left: {to: this.getXPos(index)}
-                },
-                this.slideDuration,
-                null,
-                this.slideEasing
-            );
+			this.container.setLeft(this.getXPos(index));
             this.activeIndex = index;
-            this.setClasses();
+            this.onActivate();
         }
     },
     /**
@@ -103,18 +138,37 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
         }
         this.goTo(this.activeIndex);
     },
+	showPreviews: function() {
+		this.onDeactivate();
+		this.container.removeClass('active');
+		this.previews.addClass('active');
+		this.previewIsShowing = true;
+	},
+	hidePreviews: function() {
+		this.onActivate();
+		this.container.addClass('active');
+		this.previews.removeClass('active');
+		this.previewIsShowing = false;
+	},
     /**
-     * Set the slide opacity
+     * On project activate
      */
-    setClasses: function() {
+    onActivate: function() {
         this.slides.each(function(el, t, i) {
-            el.removeClass('active');
-
             if(i == this.activeIndex) {
                 el.addClass('active');
-            }
+				el.removeClass('inactive');
+            } else {
+	            el.removeClass('active');
+				el.addClass('inactive');
+			}
         }, this);
     },
+	onDeactivate: function() {
+		this.slides.each(function(el, t, i) {
+            el.removeClass('active');
+        }, this);
+	},
 	onKeyLeft: function(e) {
 		this.prev();
 	},
@@ -122,14 +176,24 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
 		this.next();
 	},
 	onKeyUp: function(e) {
-		// stub
+		this.showPreviews();
 	},
 	onKeyDown: function(e) {
-		// stub
+		this.hidePreviews();
 	}
 });
 
+function toggleInfoBox(e) {
+	var intro = Ext.get('intro');
+	if(intro.hasClass('active')) {
+		intro.removeClass('active');
+	} else {
+		intro.addClass('active');
+	}
+}
+
 Ext.onReady(function() {
-	Ext.get("container").show();
     var carousel = new Ext.ux.Carousel("container");
+	var about = Ext.get('about');
+	about.on('click', toggleInfoBox);
 });

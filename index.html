@@ -15,24 +15,26 @@
 	<div class="wrapper">
 		<!-- Start: Header -->
 		<header class="global col-24">
-			<h1><a href="/" title="Sencha:Labs"></a></h1>
+			<h1><a href="/" title="Sencha:Labs">&nbsp;Labs</a></h1>
 			<nav>
-				<a href="Javascript:void(0);"></a>
+				<a href="Javascript:void(0);" id="about"></a>
 			</nav>
 		</header>
 		<!-- Start: Main -->
 		<article class="col-24">
-			<header class="prefix-1 suffix-6 intro">
-				<h2><span>Sencha Labs</span> is a foundation to support non-commercial projects affiliated with Sencha, 
-				such as jQTouch and Rapha&euml;l. These projects have repositories hosted on a community-accessible code 
-				hosting service, with a maintainer funded by Sencha. 
+			<section id="intro">
+				<h2 class="prefix-1 suffix-1"><span>Sencha Labs</span> is a foundation to support non-commercial projects affiliated with Sencha, such as jQTouch and Rapha&euml;l. These projects have repositories hosted on a community-accessible code 
+				hosting service, with a maintainer funded by Sencha.
 				</h2>
-			</header>
+				<div class="prefix-1">				
+					<a href="Javascript:toggleInfoBox();" class="more">close box action</a>
+				</div>
+			</section>
 			<!-- Start: Carousel -->
 			<section id="carousel">
-				<div id="container">
+				<div id="container" class="active">
 					<!-- Start: jQTouch -->
-					<div class="feature" id="project-jqtouch">
+					<div class="feature" id="project-jqtouch" data-preview="./assets/images/project-jqtouch-p.jpg">
 						<section class="info">
 							<header><h1>jQTouch</h1></header>
 							<p>A JavaScript framework which provides lightweight animation and mobile UI with jQuery or Zepto.</p>
@@ -40,7 +42,7 @@
 						</section>
 					</div>
 					<!-- Start: Raphael -->
-					<div class="feature" id="project-raphael">
+					<div class="feature" id="project-raphael" data-preview="./assets/images/project-raphael-p.jpg">
 						<section class="info">
 							<header><h1>Rapha&euml;l</h1></header>
 							<p>A JavaScript library for cross-browser vector graphics on the web.</p>
@@ -48,7 +50,7 @@
 						</section>
 					</div>
 					<!-- Start: Connect -->
-					<div class="feature" id="project-connect">
+					<div class="feature" id="project-connect" data-preview="./assets/images/project-connect-p.jpg">
 						<section class="info">
 							<header><h1>Connect</h1></header>
 							<p>an application framework that combines Rack and Node.js to provide a lean, event-driven application server.</p>
@@ -56,7 +58,7 @@
 						</section>
 					</div>
 					<!-- Start: InfoVis -->
-					<div class="feature" id="project-infovis">
+					<div class="feature" id="project-infovis" data-preview="./assets/images/project-infovis-p.jpg">
 						<section class="info">
 							<header><h1>InfoVis</h1></header>
 							<p>A JavaScript toolkit for creating interactive data visualizations for the web.</p>
@@ -64,7 +66,7 @@
 						</section>
 					</div>
 					<!-- Start: PhiloGL -->
-					<div class="feature" id="project-philogl">
+					<div class="feature" id="project-philogl" data-preview="./assets/images/project-philogl-p.jpg">
 						<section class="info">
 							<header><h1>PhiloGL</h1></header>
 							<p>A WebGL Framework for data visualization, creative coding and game development.</p>
@@ -72,6 +74,7 @@
 						</section>
 					</div>
 				</div>
+				<div id="previews"></div>
 			</section>
 		</article>
 		<!-- Start: Footer -->
