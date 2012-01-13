@@ -271,7 +271,6 @@ header.global {
 		$color: color-by-background($more-color, 40), 
 		$color-hover: $green
 	);
-
 }
 /**
  * Projects
@@ -316,4 +315,40 @@ footer.global {
 	padding-top: 10px;
 	margin-top: 10px;	
 	border-top: 1px solid #3c3c3f;
+}
+#copyright {
+	float: left;
+	line-height: 25px;
+}
+#controls {
+	float: right;
+	
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		float: left;
+		list-style-type: none;
+		margin-left: 5px;
+	}
+}
+.arrow {
+	@include transition(all $trans-duration $trans-easing);
+	@include box-shadow(rgba(#000, .3) 0 0 5px);
+	$more-color: darken($color-gray4, 15);
+	display: block;
+	font-size: 12px;
+	font-weight: bold;
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	@include background-gradient($more-color, glossy);
+	@include color-by-background($more-color, 50);
+	@include border-radius(4px);
+	
+	&:hover, &.active {
+		@include box-shadow(rgba($green, .3) 0 0 5px);
+	}
 }

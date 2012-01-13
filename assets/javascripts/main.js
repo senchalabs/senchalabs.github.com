@@ -14,6 +14,11 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
     slideMargin: -25,
 	// preview options
 	previewIsShowing: false,
+	// controls
+	controlLeftSelector: 'control-left',
+	controlRightSelector: 'control-right',
+	controlUpSelector: 'control-up',
+	controlDownSelector: 'control-down',
     /**
      * Constructor
      * @param String id
@@ -32,6 +37,10 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
         this.container = Ext.get(id);
 		this.previews = Ext.get('previews');
         this.slides  = this.container.select(this.slideSelector, false);
+		this.controlLeft = Ext.get(this.controlLeftSelector);
+		this.controlRight = Ext.get(this.controlRightSelector);
+		this.controlUp = Ext.get(this.controlUpSelector);
+		this.controlDown = Ext.get(this.controlDownSelector);
 
         // set dims
         this.slideWidth  = this.slides.item(0).getWidth() + this.slideMargin;
@@ -98,6 +107,10 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
 				this.onKeyDown(e);
 			}
 		}, this);
+		this.controlLeft.on('click', this.onKeyLeft, this);
+		this.controlRight.on('click', this.onKeyRight, this);
+		this.controlUp.on('click', this.onKeyUp, this);
+		this.controlDown.on('click', this.onKeyDown, this);
 	},
     /**
      * Get the left position of a specific slide
@@ -171,15 +184,25 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
 	},
 	onKeyLeft: function(e) {
 		this.prev();
+		this.onKeyToggle(this.controlLeft);
 	},
 	onKeyRight: function(e) {
 		this.next();
+		this.onKeyToggle(this.controlRight);
 	},
 	onKeyUp: function(e) {
 		this.showPreviews();
+		this.onKeyToggle(this.controlUp);
 	},
 	onKeyDown: function(e) {
 		this.hidePreviews();
+		this.onKeyToggle(this.controlDown);
+	},
+	onKeyToggle: function(el) {
+		el.addClass('active');
+		setTimeout(function() {
+			el.removeClass('active');
+		}, 500);
 	}
 });
 
