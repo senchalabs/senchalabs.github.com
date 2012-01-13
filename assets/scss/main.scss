@@ -119,7 +119,7 @@ header.global {
 	height: 400px;
 	position: absolute;
 	background-color: #000;
-	z-index: 999;
+	z-index: 1000;
 	top: -500px;
 	left: 0;
 	@include transition(all $trans-duration $trans-easing);
