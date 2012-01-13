@@ -1,0 +1,360 @@
+/****************************************************
+ * Main Styles
+ *
+ * @project Sencha Labs
+ * @version 1.0
+ * @author Isaac Horton <iworktoomuch@me.com>
+ * @author David Kaneda <dk@morfunk.com>
+ * @copyright 2012 Sencha Inc. All Rights Reserved.
+ *
+ ****************************************************/
+@import 'compass', 'recipes', 'normalize', 'grid';
+/****************************************************
+ * Colors
+ ****************************************************/
+$color-gray1: #ecece9;
+$color-gray2: #d8d8d8;
+$color-gray3: #707070;
+$color-gray4: #262626;
+$black: #1a1a1a;
+$green: #8bc810;
+
+/****************************************************
+ * Transitions
+ ****************************************************/
+$trans-duration: .35s;
+$trans-easing: ease-in-out;
+
+/****************************************************
+ * Type
+ ****************************************************/
+$type-stack: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+/****************************************************
+ * Misc
+ ****************************************************/
+$border-radius: 8px;
+
+.smoothtype {
+	-webkit-font-smoothing: antialiased;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+body {
+	font-size: 0.80em;
+	font-family: $type-stack;
+	@include background-polka-dot(
+		$bg-color: $color-gray4,
+		$dot-color:  darken($color-gray4, 3),
+		$size: 20%,
+		$spacing: 12px
+	);
+	@include color-by-background($color-gray4, 50);
+}
+a {
+	@include color-by-background($color-gray4, 70);
+	text-decoration: none;
+}
+h1, h2, h3, h4 {
+	line-height: 1.5em;
+	font-weight: normal;
+	@extend .smoothtype;
+}
+h1 span, h2 span, h3 span, h4 span {
+	color: $green;
+}
+* {
+	outline: 0;
+}
+
+/****************************************************
+ * Header
+ ****************************************************/
+header.global {
+	height: 50px;
+	margin: 30px 0 10px;
+	padding-left: 4px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid rgba(#fff, .1);
+
+	h1 {
+		margin: 0;
+		padding: 0;	
+		float: left;
+		
+		a {
+			color: $green;
+			width: 126px;
+			height: 50px;
+			display: block;
+			padding-left: 126px;
+			line-height: 49px;
+			background: transparent url("../images/header-logo.png") no-repeat 0 0;
+		}
+	}
+
+	nav {
+		margin-top: 15px;
+		float: right;	
+		position: relative;
+		
+		#about {
+			width: 22px;
+			height: 22px;
+			background: transparent url("../images/header-info.png") no-repeat 0 0;
+			display: block;
+		}
+	}
+}
+
+/****************************************************
+ * Article
+ ****************************************************/
+#intro {
+	width: 955px;
+	height: 400px;
+	position: absolute;
+	background-color: #000;
+	z-index: 1000;
+	top: -500px;
+	left: 0;
+	@include transition(all $trans-duration $trans-easing);
+	@include opacity(0);
+	@include border-radius($border-radius);
+	
+	&.active {
+		@include opacity(1);
+		top: 0;
+	}
+}
+
+#carousel {
+	width: 955px;
+	height: 400px;
+	position: relative;
+}
+
+#container {
+	width: 4825px;
+	position: absolute;
+	@include transition(all $trans-duration $trans-easing);
+	@include opacity(0);
+	z-index: 1;
+	
+	&.active {
+		@include opacity(1);
+		z-index: 999;
+		
+		.feature {
+			@include opacity(1);
+			@include scale(1);	
+		}	
+	}
+	
+	.feature {
+		@include transition(all $trans-duration $trans-easing);
+		-webkit-backface-visibility: hidden; // Fixes transition antialiasing
+		width: 955px;
+		height: 400px;
+		background-color: #000;
+		float: left;
+		background-repeat: none;
+		background-position: 0 0;
+		@include border-radius($border-radius);
+		@include scale(.9);
+		@include opacity(.5);
+		cursor: pointer;
+		@include transition(all $trans-duration $trans-easing);
+
+		h1 {
+			color: $green;
+			font-weight: bold;
+			margin: 0;
+			padding: 0;
+			font-size: 48px;
+		}
+
+		.info {
+			color: $color-gray1;
+			margin-top: 100px;
+			padding: 20px 500px 30px 50px;
+
+			p {
+				margin: 0;
+				font-size: 18px;
+				line-height: 1.4em;
+			}
+		}
+
+		a {
+			pointer-events: none;
+		}
+
+		&.active {
+			cursor: default;
+			@include opacity(1);
+			@include scale(1);
+			@include box-shadow(rgba(#000, .3) 0 1px 3px);
+
+			a {
+				pointer-events: all;
+			}
+		}
+		&.inactive {
+			@include scale(.9);
+			@include opacity(.5);
+		}
+	}
+}
+
+#previews {
+	width: 100%;
+	height: 400px;
+	@include transition(all $trans-duration $trans-easing);
+	@include opacity(0);
+	z-index: 1;
+	position: absolute;
+	
+	&.active {
+		display: block;
+		@include opacity(1);
+		@include scale(1);
+		z-index: 999;
+		
+		.preview {
+			@include scale(1);
+		}
+		
+	}
+	.preview {
+		width: 306px;
+		height: 190px;
+		float: left;
+		background-color: #000;
+		margin-left: 5px;
+		margin-right: 5px;
+		margin-bottom: 10px;
+		@include transition(all $trans-duration $trans-easing);
+		@include box-shadow(rgba(#000, .3) 0 1px 3px);
+		@include border-radius($border-radius);
+		@include scale(.7);
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		
+		h2 {
+			width: 286px;
+			color: $green;
+			font-weight: bold;
+			margin: 0;
+			padding: 10px;
+			font-size: 18px;
+			background-color: #000;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			@include opacity(.8);
+			@include border-bottom-radius($border-radius);
+		}
+	}
+}
+.more {
+	$more-color: darken($color-gray4, 15);
+	display: inline-block;
+	font-size: 14px;
+	font-weight: bold;
+	@include background-gradient($more-color, glossy);
+	@include color-by-background($more-color, 50);
+	margin-top: 10px;
+	@include webfont-icon(
+		'►', 
+		$size: 10px, 
+		$text-align: right,
+		$hide-text: false, 
+		$color: color-by-background($more-color, 40), 
+		$color-hover: $green
+	);
+}
+/**
+ * Projects
+ */
+#project-jqtouch {
+	background-image: url('../images/project-jqtouch.jpg');
+}
+#project-connect {
+	background-image: url('../images/project-connect.jpg');
+	h1 {
+		color: #56AAEA;
+	}
+}
+#project-infovis {
+	background-image: url('../images/project-infovis.jpg');
+	h1 { 
+		color: #009EDA; 
+	}
+}
+#project-philogl {
+	background-image: url('../images/project-philogl.jpg');
+
+	h1 { 
+		color: #009EDA; 
+	}
+}
+#project-raphael {
+	background-image: url('../images/project-raphael.jpg');
+
+	h1 {
+		color: #F89938;
+	}
+}
+
+/****************************************************
+ * Footer
+ ****************************************************/
+footer.global {
+	-webkit-backface-visibility: hidden; // Fixes transition flicker
+	@include color-by-background($color-gray4, 30);
+	height: 30px;
+	padding-top: 10px;
+	margin-top: 10px;	
+	border-top: 1px solid #3c3c3f;
+}
+#copyright {
+	float: left;
+	line-height: 25px;
+}
+#controls {
+	float: right;
+	
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+	li {
+		float: left;
+		list-style-type: none;
+		margin-left: 5px;
+	}
+}
+.arrow {
+	@include transition(all $trans-duration $trans-easing);
+	@include box-shadow(rgba(#000, .3) 0 0 5px);
+	$more-color: darken($color-gray4, 15);
+	display: block;
+	font-size: 12px;
+	font-weight: bold;
+	width: 25px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	@include background-gradient($more-color, glossy);
+	@include color-by-background($more-color, 50);
+	@include border-radius(4px);
+	
+	&:hover, &.active {
+		@include box-shadow(rgba($green, .3) 0 0 5px);
+	}
+}
