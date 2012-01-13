@@ -143,9 +143,11 @@ header.global {
 	position: absolute;
 	@include transition(all $trans-duration $trans-easing);
 	@include opacity(0);
+	z-index: 1;
 	
 	&.active {
 		@include opacity(1);
+		z-index: 999;
 		
 		.feature {
 			@include opacity(1);
@@ -214,11 +216,15 @@ header.global {
 	height: 400px;
 	@include transition(all $trans-duration $trans-easing);
 	@include opacity(0);
+	z-index: 1;
+	position: absolute;
 	
 	&.active {
 		display: block;
 		@include opacity(1);
 		@include scale(1);
+		z-index: 999;
+		
 		.preview {
 			@include scale(1);
 		}
