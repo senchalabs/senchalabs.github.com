@@ -18,6 +18,7 @@ $color-gray3: #707070;
 $color-gray4: #262626;
 $black: #1a1a1a;
 $green: #8bc810;
+$more-color: darken($color-gray4, 15);
 
 /****************************************************
  * Transitions
@@ -103,10 +104,25 @@ header.global {
 		position: relative;
 		
 		#about {
+			color: #fff;
+			text-shadow: 0 1px 0 #000;
+			text-align: center;
+			line-height: 22px;
+			font-weight: bold;
 			width: 22px;
 			height: 22px;
-			background: transparent url("../images/header-info.png") no-repeat 0 0;
+			@include border-radius(22px);
+			@include background-gradient($more-color, glossy);
+			@include color-by-background($more-color, 50);
+			@include transition(all $trans-duration $trans-easing);
+			@include box-shadow(rgba(#000, .3) 0 0 5px);
+			/*background: transparent url("../images/header-info.png") no-repeat 0 0;*/
 			display: block;
+			border: 1px solid lighten($color-gray4, 10);
+			
+			&:hover, &.active {
+				@include box-shadow(rgba($green, .5) 0 0 3px);
+			}
 		}
 	}
 }
@@ -262,7 +278,6 @@ header.global {
 	}
 }
 .more {
-	$more-color: darken($color-gray4, 15);
 	display: inline-block;
 	font-size: 14px;
 	font-weight: bold;
@@ -348,13 +363,14 @@ footer.global {
 	font-weight: bold;
 	width: 25px;
 	height: 25px;
-	line-height: 25px;
+	line-height: 23px;
 	text-align: center;
 	@include background-gradient($more-color, glossy);
 	@include color-by-background($more-color, 50);
 	@include border-radius(4px);
+	border: 1px solid lighten($color-gray4, 5);
 	
 	&:hover, &.active {
-		@include box-shadow(rgba($green, .3) 0 0 5px);
+		@include box-shadow(rgba($green, 0.5) 0 0 3px);
 	}
 }
