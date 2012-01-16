@@ -177,32 +177,61 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
 			}
         }, this);
     },
+    /**
+     * On projects deactivate
+     */
 	onDeactivate: function() {
 		this.slides.each(function(el, t, i) {
             el.removeClass('active');
         }, this);
 	},
+	/**
+	 * On left key event
+	 * @param Event e
+	 */
 	onKeyLeft: function(e) {
 		this.prev();
 		this.onKeyToggle(this.controlLeft);
 	},
+	/**
+	 * On right key event
+	 * @param Event e
+	 */
 	onKeyRight: function(e) {
 		this.next();
 		this.onKeyToggle(this.controlRight);
 	},
+	/**
+	 * On up key event
+	 * @param Event e
+	 */
 	onKeyUp: function(e) {
-		this.showPreviews();
+		this.togglePreviews();			
 		this.onKeyToggle(this.controlUp);
 	},
+	/**
+	 * On down key event
+	 * @param Event e
+	 */
 	onKeyDown: function(e) {
-		this.hidePreviews();
+		this.togglePreviews();
 		this.onKeyToggle(this.controlDown);
 	},
+	/**
+	 * Toggle key classes
+	 * @param Element el
+	 */
 	onKeyToggle: function(el) {
 		el.addClass('active');
 		setTimeout(function() {
 			el.removeClass('active');
 		}, 500);
+	},
+	/**
+	 * Toggle previews
+	 */
+	togglePreviews: function() {
+		this.previewIsShowing ? this.hidePreviews() : this.showPreviews();
 	}
 });
 
