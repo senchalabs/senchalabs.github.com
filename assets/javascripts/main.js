@@ -63,7 +63,7 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
 			// set margin
             el.setStyle('marginRight', this.slideMargin + "px");
 			// get the project title
-			var title = el.select('h1').elements[0].innerText;
+			var title = el.select('h1').elements[0].innerHTML;
 			// create the preview
 			var pr = this.createPreview(el.getAttribute('data-preview'), title);
 			// set click handler
