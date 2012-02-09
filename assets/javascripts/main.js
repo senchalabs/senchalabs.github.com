@@ -82,8 +82,9 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
      * @return Element
      */
     createPreview: function(p,t) {
-        var preview = Ext.get(Ext.DomHelper.append(this.previews, { class: 'preview' }));
+        var preview = Ext.get(Ext.DomHelper.append(this.previews, true));
         preview.setStyle('backgroundImage', 'url("'+p+'")');
+        preview.addClass('preview');
         Ext.DomHelper.append(preview, {
             tag: 'h2',
             html: t
