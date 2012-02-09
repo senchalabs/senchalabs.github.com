@@ -95,17 +95,17 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
      * Register key press events
      */
     registerKeyPressEvents: function() {
-        Ext.EventManager.addListener(window, 'keydown', function(e,t) {
+        Ext.EventManager.addListener(document, 'keydown', function(e,t) {
             if(e.keyCode == this.KEY_LEFT && !this.previewIsShowing) {
                 this.onKeyLeft(e);
             }
             if(e.keyCode == this.KEY_RIGHT && !this.previewIsShowing) {
                 this.onKeyRight(e);
             }
-            if(e.keyCode == this.KEY_UP) {
+            if(e.keyCode == this.KEY_UP && !this.previewIsShowing) {
                 this.onKeyUp(e);
             }
-            if(e.keyCode == this.KEY_DOWN) {
+            if(e.keyCode == this.KEY_DOWN && !this.previewIsShowing) {
                 this.onKeyDown(e);
             }
             if(e.keyCode == this.KEY_WHAT) {

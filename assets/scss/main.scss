@@ -267,6 +267,7 @@ header.global {
 		@include scale(.7);
 		background-repeat: no-repeat;
 		background-position: 0 0;
+		position: relative;
 		
 		h2 {
 			width: 286px;
