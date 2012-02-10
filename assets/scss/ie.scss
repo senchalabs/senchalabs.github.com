@@ -1,0 +1,14 @@
+#container {
+	display: none;
+	
+	&.active {
+		display: block;
+	}
+}
+#previews {
+	display: none;
+	
+	&.active {
+		display: block;
+	}
+}

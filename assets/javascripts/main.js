@@ -12,7 +12,7 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
     KEY_WHAT: 191,
     // slide options
     slideSelector: 'div.feature',
-    slideMargin: -25,
+    slideMargin: (Ext.isIE) ? 10 : -25,
     // preview options
     previewIsShowing: false,
     // controls
@@ -102,10 +102,10 @@ Ext.ux.Carousel = Ext.extend(Ext.util.Observable, {
             if(e.keyCode == this.KEY_RIGHT && !this.previewIsShowing) {
                 this.onKeyRight(e);
             }
-            if(e.keyCode == this.KEY_UP && !this.previewIsShowing) {
+            if(e.keyCode == this.KEY_UP) {
                 this.onKeyUp(e);
             }
-            if(e.keyCode == this.KEY_DOWN && !this.previewIsShowing) {
+            if(e.keyCode == this.KEY_DOWN) {
                 this.onKeyDown(e);
             }
             if(e.keyCode == this.KEY_WHAT) {

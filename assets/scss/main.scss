@@ -8,7 +8,7 @@
  * @copyright 2012 Sencha Inc. All Rights Reserved.
  *
  ****************************************************/
-@import 'compass', 'recipes', 'normalize', 'grid';
+@import 'compass', 'recipes', 'normalize', 'grid', 'pie';
 /****************************************************
  * Colors
  ****************************************************/
@@ -131,6 +131,7 @@ header.global {
  * Article
  ****************************************************/
 #intro {
+	@extend .bordered;
 	width: 955px;
 	height: 380px;
 	position: absolute;
@@ -138,7 +139,6 @@ header.global {
 	z-index: 1000;
 	top: -500px;
 	left: 0;
-
 	padding-top: 20px;
 
 	@include transition(all $trans-duration $trans-easing);
@@ -179,6 +179,7 @@ header.global {
 	}
 	
 	.feature {
+		@extend .bordered;
 		@include transition(all $trans-duration $trans-easing);
 		-webkit-backface-visibility: hidden; // Fixes transition antialiasing
 		width: 955px;
@@ -254,6 +255,7 @@ header.global {
 		
 	}
 	.preview {
+		@extend .bordered;
 		width: 306px;
 		height: 190px;
 		float: left;
@@ -270,6 +272,7 @@ header.global {
 		position: relative;
 		
 		h2 {
+			@extend .bordered;
 			width: 286px;
 			color: $green;
 			font-weight: bold;
@@ -363,6 +366,7 @@ footer.global {
 	}
 }
 .arrow {
+	@extend .bordered;
 	@include transition(all $trans-duration $trans-easing);
 	@include box-shadow(rgba(#000, .3) 0 0 5px);
 	$more-color: darken($color-gray4, 15);
