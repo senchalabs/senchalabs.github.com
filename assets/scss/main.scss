@@ -162,7 +162,7 @@ header.global {
 }
 
 #container {
-	width: 4825px;
+	width: (955px * 6) + 20px;
 	position: absolute;
 	@include transition(all $trans-duration $trans-easing);
 	@include opacity(0);
